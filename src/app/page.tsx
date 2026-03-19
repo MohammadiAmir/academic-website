@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import Image from "next/image";
 
 export default async function Home() {
   const { data, error } = await supabase
@@ -21,13 +22,13 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-white text-black">
-      <section className="max-w-5xl mx-auto px-6 py-20">
+      <section className="max-w-7xl mx-auto px-8 md:px-10 py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
           {/* Left column */}
           <div className="md:col-span-2">
             <p className="text-sm uppercase tracking-[0.2em] text-gray-500 mb-4">
               Academic Profile
-            </p>
+         S   </p>
 
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
               {data.full_name}
@@ -64,8 +65,58 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Right column */}
-          <div className="md:col-span-1">
+{/* Right column */}
+<div className="md:col-span-1 space-y-6">
+  {/* Main profile image */}
+  <a
+    href="/images/profile1.jpg"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="block rounded-2xl overflow-hidden shadow-md"
+  >
+    <Image
+      src="/images/profile1.jpg"
+      alt="Profile"
+      width={500}
+      height={650}
+      className="w-full h-auto object-cover hover:scale-[1.02] transition"
+    />
+  </a>
+
+  {/* Small image grid */}
+  <div className="grid grid-cols-2 gap-4">
+    <a
+      href="/images/profile2.jpg"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block rounded-xl overflow-hidden shadow-sm"
+    >
+      <Image
+        src="/images/profile2.jpg"
+        alt="Profile 2"
+        width={300}
+        height={300}
+        className="w-full h-full object-cover hover:scale-[1.02] transition"
+      />
+    </a>
+
+    <a
+      href="/images/profile3.jpg"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block rounded-xl overflow-hidden shadow-sm"
+    >
+      <Image
+        src="/images/profile3.jpg"
+        alt="Profile 3"
+        width={300}
+        height={300}
+        className="w-full h-full object-cover hover:scale-[1.02] transition"
+      />
+    </a>
+  </div>
+
+            {/* Quick info card */}
             <div className="rounded-2xl border border-gray-200 p-6 shadow-sm">
               <h2 className="text-lg font-semibold mb-4">Quick Info</h2>
 
