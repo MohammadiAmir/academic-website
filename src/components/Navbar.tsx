@@ -15,7 +15,7 @@ export default function Navbar() {
           <Link href="#" className="hover:text-black transition">
             Research
           </Link>
-          <Link href="#" className="hover:text-black transition">
+          <Link href="/publications" className="hover:text-black transition">
             Publications
           </Link>
           <Link href="#" className="hover:text-black transition">
