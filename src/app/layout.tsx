@@ -4,8 +4,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Academic Website",
-  description: "Professional academic website built with Next.js and Supabase",
+  title: "Amir Mohammadisarab",
+  description: "PhD student in data fusion, cooperative perception, vehicular networks, and intelligent transportation systems.",
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-white text-black min-h-screen flex flex-col">
+      <body className="bg-[#0b1020] text-white min-h-screen flex flex-col">
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />

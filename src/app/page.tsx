@@ -10,168 +10,185 @@ export default async function Home() {
 
   if (error || !data) {
     return (
-      <main className="min-h-screen bg-white text-black flex items-center justify-center px-6">
-        <div className="max-w-2xl w-full text-center">
-          <h1 className="text-3xl font-bold mb-4">Academic Website</h1>
-          <p className="text-red-600 font-medium">Failed to load profile data.</p>
-          {error && <p className="mt-2 text-sm text-gray-600">{error.message}</p>}
+      <main className="min-h-screen flex items-center justify-center px-6 bg-[#0b1020] text-white">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-3">Failed to load profile</h1>
+          <p className="text-gray-400">{error?.message}</p>
         </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-white text-black">
-      <section className="max-w-7xl mx-auto px-8 md:px-10 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-          {/* Left column */}
-          <div className="md:col-span-2">
-            <p className="text-sm uppercase tracking-[0.2em] text-gray-500 mb-4">
-              Academic Profile
-         S   </p>
+    <main className="min-h-screen bg-[#0b1020] text-white">
+      <section className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left */}
+          <div>
+            <p className="text-sm uppercase tracking-[0.25em] text-cyan-300 mb-4">
+              Robotics • AI • Data Fusion • Cooperative Perception
+            </p>
 
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
               {data.full_name}
             </h1>
 
-            <p className="text-xl text-gray-700 mb-2">{data.title}</p>
-            <p className="text-lg text-gray-600 mb-8">{data.affiliation}</p>
+            <p className="text-xl md:text-2xl text-gray-300 mb-3">
+              {data.title}
+            </p>
 
-            <p className="text-base md:text-lg leading-8 text-gray-800 max-w-3xl mb-10">
+            <p className="text-lg text-cyan-200 mb-8">
+              {data.affiliation}
+              {data.location ? ` • ${data.location}` : ""}
+            </p>
+
+            <p className="text-lg leading-8 text-gray-300 max-w-3xl mb-10">
               {data.bio_short}
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 mb-10">
               <a
-                href="#"
-                className="inline-block rounded-xl border border-black px-5 py-3 text-sm font-medium hover:bg-black hover:text-white transition"
+                href={data.cv_url || "#"}
+                className="rounded-xl bg-cyan-400 text-black px-5 py-3 text-sm font-semibold hover:opacity-90 transition"
               >
                 Download CV
               </a>
 
               <a
-                href="#"
-                className="inline-block rounded-xl border border-gray-300 px-5 py-3 text-sm font-medium hover:border-black transition"
+                href="/publications"
+                className="rounded-xl border border-white/20 px-5 py-3 text-sm font-medium hover:border-cyan-300 hover:text-cyan-300 transition"
               >
-                Publications
+                View Publications
               </a>
 
               <a
                 href={`mailto:${data.email}`}
-                className="inline-block rounded-xl border border-gray-300 px-5 py-3 text-sm font-medium hover:border-black transition"
+                className="rounded-xl border border-white/20 px-5 py-3 text-sm font-medium hover:border-cyan-300 hover:text-cyan-300 transition"
               >
-                Contact
+                Contact Me
               </a>
+            </div>
+
+            <div className="flex flex-wrap gap-3 text-sm">
+              {data.google_scholar_url && (
+                <a href={data.google_scholar_url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition">
+                  Google Scholar
+                </a>
+              )}
+              {data.github_url && (
+                <a href={data.github_url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition">
+                  GitHub
+                </a>
+              )}
+              {data.linkedin_url && (
+                <a href={data.linkedin_url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition">
+                  LinkedIn
+                </a>
+              )}
+              {data.orcid_url && (
+                <a href={data.orcid_url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition">
+                  ORCID
+                </a>
+              )}
+              {data.researchgate_url && (
+                <a href={data.researchgate_url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition">
+                  ResearchGate
+                </a>
+              )}
             </div>
           </div>
 
-{/* Right column */}
-<div className="md:col-span-1 space-y-6">
-  {/* Main profile image */}
-  <a
-    href="/images/profile1.jpg"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="block rounded-2xl overflow-hidden shadow-md"
-  >
-    <Image
-      src="/images/profile1.jpg"
-      alt="Profile"
-      width={500}
-      height={650}
-      className="w-full h-auto object-cover hover:scale-[1.02] transition"
-    />
-  </a>
+          {/* Right */}
+          <div className="relative">
+            <div className="absolute -top-6 -left-6 w-40 h-40 bg-cyan-400/20 blur-3xl rounded-full" />
+            <div className="absolute -bottom-8 -right-8 w-56 h-56 bg-blue-500/20 blur-3xl rounded-full" />
 
-  {/* Small image grid */}
-  <div className="grid grid-cols-2 gap-4">
-    <a
-      href="/images/profile2.jpg"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block rounded-xl overflow-hidden shadow-sm"
-    >
-      <Image
-        src="/images/profile2.jpg"
-        alt="Profile 2"
-        width={300}
-        height={300}
-        className="w-full h-full object-cover hover:scale-[1.02] transition"
-      />
-    </a>
+            <div className="relative grid grid-cols-2 gap-4">
+              <a
+                href="/images/profile1.jpg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="col-span-2 rounded-3xl overflow-hidden border border-white/10 shadow-2xl"
+              >
+                <Image
+                  src="/images/profile1.jpg"
+                  alt="Profile 1"
+                  width={900}
+                  height={700}
+                  className="w-full h-[420px] object-cover hover:scale-[1.02] transition duration-300"
+                />
+              </a>
 
-    <a
-      href="/images/profile3.jpg"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block rounded-xl overflow-hidden shadow-sm"
-    >
-      <Image
-        src="/images/profile3.jpg"
-        alt="Profile 3"
-        width={300}
-        height={300}
-        className="w-full h-full object-cover hover:scale-[1.02] transition"
-      />
-    </a>
-  </div>
+              <a
+                href="/images/profile2.jpg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-2xl overflow-hidden border border-white/10"
+              >
+                <Image
+                  src="/images/profile2.jpg"
+                  alt="Profile 2"
+                  width={400}
+                  height={300}
+                  className="w-full h-[180px] object-cover hover:scale-[1.03] transition duration-300"
+                />
+              </a>
 
-            {/* Quick info card */}
-            <div className="rounded-2xl border border-gray-200 p-6 shadow-sm">
-              <h2 className="text-lg font-semibold mb-4">Quick Info</h2>
-
-              <div className="space-y-4 text-sm text-gray-700">
-                <div>
-                  <p className="font-medium text-black">Email</p>
-                  <p>{data.email}</p>
-                </div>
-
-                <div>
-                  <p className="font-medium text-black">Affiliation</p>
-                  <p>{data.affiliation}</p>
-                </div>
-
-                <div>
-                  <p className="font-medium text-black">Research Areas</p>
-                  <ul className="mt-2 space-y-2 list-disc list-inside text-gray-700">
-                    <li>Data Fusion</li>
-                    <li>Cooperative Perception</li>
-                    <li>Vehicular Networks</li>
-                    <li>V2X Communication</li>
-                    <li>Autonomous Driving</li>
-                  </ul>
-                </div>
-              </div>
+              <a
+                href="/images/profile3.jpg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-2xl overflow-hidden border border-white/10"
+              >
+                <Image
+                  src="/images/profile3.jpg"
+                  alt="Profile 3"
+                  width={400}
+                  height={300}
+                  className="w-full h-[180px] object-cover hover:scale-[1.03] transition duration-300"
+                />
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Research interest preview */}
+        {/* Research cards */}
         <section className="mt-24">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8">Research Interests</h2>
+          <div className="mb-10">
+            <p className="text-sm uppercase tracking-[0.25em] text-cyan-300 mb-3">
+              Focus Areas
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold">Research Interests</h2>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-2xl border border-gray-200 p-6 shadow-sm">
-              <h3 className="text-lg font-semibold mb-3">Multi-Sensor Data Fusion</h3>
-              <p className="text-gray-700 leading-7">
-                Research on object-level and track-level fusion methods for robust
-                environment perception using heterogeneous sensing sources.
+            <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur p-6">
+              <h3 className="text-xl font-semibold mb-3 text-cyan-300">
+                Multi-Sensor Data Fusion
+              </h3>
+              <p className="text-gray-300 leading-8">
+                Robust object-level and track-level fusion of heterogeneous sensing
+                sources for perception in intelligent transportation systems.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-gray-200 p-6 shadow-sm">
-              <h3 className="text-lg font-semibold mb-3">Cooperative Perception</h3>
-              <p className="text-gray-700 leading-7">
-                V2X-enabled perception frameworks that extend sensing coverage,
-                improve awareness, and support collaborative intelligent vehicles.
+            <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur p-6">
+              <h3 className="text-xl font-semibold mb-3 text-cyan-300">
+                Cooperative Perception
+              </h3>
+              <p className="text-gray-300 leading-8">
+                Collaborative perception frameworks using V2X communication to extend
+                sensing range, improve awareness, and support connected vehicles.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-gray-200 p-6 shadow-sm">
-              <h3 className="text-lg font-semibold mb-3">Vehicular Networks</h3>
-              <p className="text-gray-700 leading-7">
-                Communication-aware perception and fusion strategies for connected
-                and automated driving systems in dynamic traffic environments.
+            <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur p-6">
+              <h3 className="text-xl font-semibold mb-3 text-cyan-300">
+                Vehicular AI Systems
+              </h3>
+              <p className="text-gray-300 leading-8">
+                AI-driven perception, association, and communication-aware decision
+                support for connected and automated driving in dynamic environments.
               </p>
             </div>
           </div>
