@@ -1,5 +1,14 @@
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
+import {
+  Github,
+  Linkedin,
+  GraduationCap,
+  Orbit,
+  BookOpen,
+  Mail,
+  MapPin,
+} from "lucide-react";
 
 export default async function Home() {
   const { data, error } = await supabase
@@ -37,10 +46,20 @@ export default async function Home() {
               {data.title}
             </p>
 
-            <p className="text-lg text-cyan-200 mb-8">
-              {data.affiliation}
-              {data.location ? ` • ${data.location}` : ""}
-            </p>
+            <div className="flex flex-wrap items-center gap-4 text-lg text-cyan-200 mb-8">
+              <div className="inline-flex items-center gap-2">
+                <Mail size={18} />
+                <span>{data.email}</span>
+              </div>
+
+              <div className="inline-flex items-center gap-2">
+                <MapPin size={18} />
+                <span>
+                  {data.affiliation}
+                  {data.location ? ` • ${data.location}` : ""}
+                </span>
+              </div>
+            </div>
 
             <p className="text-lg leading-8 text-gray-300 max-w-3xl mb-10">
               {data.bio_short}
@@ -71,28 +90,62 @@ export default async function Home() {
 
             <div className="flex flex-wrap gap-3 text-sm">
               {data.google_scholar_url && (
-                <a href={data.google_scholar_url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition">
-                  Google Scholar
+                <a
+                  href={data.google_scholar_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition"
+                >
+                  <GraduationCap size={16} />
+                  <span>Google Scholar</span>
                 </a>
               )}
+
               {data.github_url && (
-                <a href={data.github_url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition">
-                  GitHub
+                <a
+                  href={data.github_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition"
+                >
+                  <Github size={16} />
+                  <span>GitHub</span>
                 </a>
               )}
+
               {data.linkedin_url && (
-                <a href={data.linkedin_url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition">
-                  LinkedIn
+                <a
+                  href={data.linkedin_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition"
+                >
+                  <Linkedin size={16} />
+                  <span>LinkedIn</span>
                 </a>
               )}
+
               {data.orcid_url && (
-                <a href={data.orcid_url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition">
-                  ORCID
+                <a
+                  href={data.orcid_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition"
+                >
+                  <Orbit size={16} />
+                  <span>ORCID</span>
                 </a>
               )}
+
               {data.researchgate_url && (
-                <a href={data.researchgate_url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition">
-                  ResearchGate
+                <a
+                  href={data.researchgate_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-gray-300 hover:text-cyan-300 hover:border-cyan-300 transition"
+                >
+                  <BookOpen size={16} />
+                  <span>ResearchGate</span>
                 </a>
               )}
             </div>
