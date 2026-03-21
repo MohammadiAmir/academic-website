@@ -9,6 +9,7 @@ import {
   Mail,
   MapPin,
 } from "lucide-react";
+import HeroImageCarousel from "@/components/HeroImageCarousel";
 
 export default async function Home() {
   const { data, error } = await supabase
@@ -157,20 +158,7 @@ export default async function Home() {
             <div className="absolute -bottom-8 -right-8 w-56 h-56 bg-blue-500/20 blur-3xl rounded-full" />
 
             <div className="relative grid grid-cols-2 gap-4">
-              <a
-                href="/images/profile1.jpg"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="col-span-2 rounded-3xl overflow-hidden border border-white/10 shadow-2xl"
-              >
-                <Image
-                  src="/images/profile1.jpg"
-                  alt="Profile 1"
-                  width={900}
-                  height={700}
-                  className="w-full h-[420px] object-cover hover:scale-[1.02] transition duration-300"
-                />
-              </a>
+            <HeroImageCarousel />
 
               <a
                 href="/images/profile2.jpg"
